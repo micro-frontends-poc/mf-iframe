@@ -1,0 +1,62 @@
+nav {
+  display: flex;
+  justify-content: between;
+  align-items: center;
+  flex-wrap: wrap;
+  background: rgb(147, 125, 187);
+  padding: 1rem;
+}
+
+.logo-container {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  color: white;
+  margin-right: 1rem;
+}
+
+.logo-container span {
+  font-weight: 500;
+  font-size: 2rem;
+}
+
+.toggle button {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border: 1px solid black;
+}
+.toggle button:hover {
+  color: white;
+  border-color: white;
+}
+
+.menu {
+  width: 100%;
+  display: block;
+  flex-grow: 1;
+}
+
+.menu-items a {
+  display: block;
+  margin-top: 0.6rem;
+}
+
+@media screen and (min-width: 700px) {
+  .toggle {
+    display: hidden;
+  }
+  .menu {
+    display: flex;
+    align-items: center;
+    width: auto;
+  }
+  .menu-items {
+    flex-grow: 1;
+  }
+  .menu-items a {
+    display: inline-block;
+    margin-top: 0;
+    margin-right: 0.5rem;
+  }
+}
