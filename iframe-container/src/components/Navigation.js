@@ -3,13 +3,21 @@ import "./Navigation.css"
 
 const Navigation = props => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const openLoginPanel = () => {
+    alert(4)
+  }
+
   return (
-    <nav>
-      <div className="logo-container">
-        <span className="">Microshop</span>
+    <nav className="flex items-center justify-between flex-wrap bg-purple-800 p-6">
+      <div className="flex items-center flex-shrink-0 text-white mr-6">
+        <span className="font-semibold text-xl tracking-tight">Microshop</span>
       </div>
-      <div className="toggle">
-        <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+      <div className="block md:hidden">
+        <button
+          className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
           <svg
             className="fill-current h-3 w-3"
             viewBox="0 0 20 20"
@@ -20,26 +28,34 @@ const Navigation = props => {
           </svg>
         </button>
       </div>
-      <div className="menu">
-        {isMenuOpen && (
-          <div className="menu-items">
-            <a href="#responsive-header" className="">
+      {(isMenuOpen || window.innerWidth >= 768) && (
+        <div className="w-full block flex-grow md:flex md:items-center md:w-auto">
+          <div className="text-sm md:flex-grow">
+            {props.prod}
+            <a
+              href="#products"
+              className="block mt-4 md:inline-block md:mt-0 text-teal-200 hover:text-white mr-4"
+            >
               Docs
             </a>
-            <a href="#responsive-header" className="">
+            <a
+              href="#products"
+              className="block mt-4 md:inline-block md:mt-0 text-teal-200 hover:text-white mr-4"
+            >
               Examples
             </a>
           </div>
-        )}
-        <div>
-          <a
-            href="#"
-            className="login-link inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
-          >
-            Login
-          </a>
+
+          <div>
+            <button
+              className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-purple-800 hover:bg-white mt-4 md:mt-0"
+              onClick={() => openLoginPanel()}
+            >
+              Login
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </nav>
   )
 }
