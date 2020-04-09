@@ -1,0 +1,32 @@
+version: "3"
+services:
+  container:
+    container_name: iframe-container
+    ports:
+      - "3000:3000"
+    build:
+      context: ./iframe-container
+      dockerfile: Dockerfile
+    volumes:
+      - "./iframe-container:/var/app"
+      - "/var/app/node_modules"
+  product:
+    container_name: iframe-product
+    ports:
+      - "3001:3001"
+    build:
+      context: ./iframe-product
+      dockerfile: Dockerfile
+    volumes:
+      - "./iframe-product:/var/app"
+      - "/var/app/node_modules"
+  cart:
+    container_name: iframe-cart
+    ports:
+      - "3002:4200"
+    build:
+      context: ./iframe-cart
+      dockerfile: Dockerfile
+    volumes:
+      - "./iframe-cart:/var/app"
+      - "/var/app/node_modules"
