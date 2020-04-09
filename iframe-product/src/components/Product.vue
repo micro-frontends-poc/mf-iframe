@@ -6,9 +6,9 @@
     <div>
       <h3>{{ product.name }}</h3>
       <p>{{ product.description }}</p>
-      <span>{{ product.price }}</span>
+      <span>€{{ product.price }}</span>
     </div>
-    <button @click="addToCart">+</button>
+    <button class="btn-main " @click="addToCart">+</button>
   </div>
 </template>
 
@@ -28,8 +28,8 @@ export default {
   padding: 1rem;
   margin: 1rem;
   border-radius: 10px;
-  background: #55b9f3;
-  box-shadow: 20px 20px 40px #489dcf;
+  background: #fff;
+  box-shadow: 2px 2px 15px #afb8d4;
   display: flex;
 
   .img-container {
@@ -43,6 +43,8 @@ export default {
 
   h3 {
     margin-top: 0;
+  }
+  p {
   }
 
   button {
@@ -58,6 +60,11 @@ export default {
     align-self: flex-end;
     margin-left: auto;
     cursor: pointer;
+    transition: all 0.5s;
+    &:hover {
+      transform: scale(1.01);
+      background: lighten(#ff4848, 5%);
+    }
     &:focus {
       outline: none;
     }

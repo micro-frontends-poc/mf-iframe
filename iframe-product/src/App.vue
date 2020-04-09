@@ -17,14 +17,16 @@ export default {
       products: [
         {
           id: 1,
-          name: "Product name 1",
-          description: "description of prod1",
+          name: "Children of Men",
+          description: `Children of Men is a 2006 dystopian action thriller film directed and co-written
+           by Alfonso Cuarón.`,
           price: 10.0
         },
         {
           id: 2,
-          name: "Product name 2",
-          description: "description of prod2",
+          name: "Hunt for the Wilderpeople",
+          description: `A national manhunt is ordered for a rebellious kid and his foster uncle who go 
+            missing in the wild New Zealand bush.`,
           price: 11.0
         }
       ]
@@ -34,10 +36,6 @@ export default {
 </script>
 
 <style>
-html,
-body {
-  background: #55b9f3;
-}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -1,7 +1,8 @@
+//var PORT = require(".env")
 module.exports = {
   publicPath: "/product/",
   lintOnSave: "warning",
   devServer: {
-    port: 3001
+    port: process.env.PORT
   }
 }

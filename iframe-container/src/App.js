@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react"
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import "./App.css"
 import Navigation from "./components/Navigation"
 
 function App() {
-  // const products = document.querySelector("#products")
-  const [wantedProd, setWantedProd] = useState(null)
+  const [products, setProducts] = useState([])
   useEffect(() => {
-    const sendReceived = event => {
+    const sendReceived = (event) => {
       if (event.origin.startsWith("http://localhost:3001")) {
-        setWantedProd(event.data.name)
-        console.log(event.data)
-        // document
-        //   .querySelectorAll("iframe")
-        //   .forEach(iframe => iframe.contentWindow.postMessage(event.data, "*"))
+        setProducts((products) => [...products, event.data.name])
+        document
+          .querySelectorAll("iframe")
+          .forEach((iframe) =>
+            iframe.contentWindow.postMessage(event.data, "*")
+          )
       }
     }
 
@@ -21,17 +22,30 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <Navigation prod={wantedProd} />
-      <iframe
-        src="http://localhost:3001/product/"
-        frameBorder="0"
-        title="iframe Example 1"
-        width="100%"
-        height="100%"
-        id="products"
-      ></iframe>
-    </div>
+    <Router>
+      <div className="App">
+        <Navigation products={products} />
+        <Route exact path="/">
+          <iframe
+            src="http://localhost:3001/product/"
+            frameBorder="0"
+            title="Products made with Vue"
+            width="100%"
+            height="100%"
+            id="cart"
+          ></iframe>
+          <iframe
+            src="http://localhost:3002"
+            frameBorder="0"
+            title="Cart made with Angular"
+            width="100%"
+            height="100%"
+            id="products"
+          ></iframe>
+        </Route>
+        <Route path="/cart"></Route>
+      </div>
+    </Router>
   )
 }
 
