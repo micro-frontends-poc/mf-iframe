@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class=" mt-4">
     <product v-for="p in products" :key="p.id" :product="p" />
   </div>
 </template>
