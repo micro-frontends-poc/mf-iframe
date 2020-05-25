@@ -1,9 +1,19 @@
-<section class="cart-container">
-  <h2>Cart</h2>
+<section
+  class="cart-container"
+  [class.dark]="isDarkMode"
+  [class.light]="!isDarkMode"
+>
+  <div class="header">
+    <img src="./assets/Angular.png" alt="Angular logo" class="ng-logo" />
+    <h2>Cart</h2>
+  </div>
   <section class="item-cart" *ngFor="let item of items">
-    <button class="btn-remove" (click)="removeItem(item)"></button>
-    {{ item.id }}
-    {{ item.name }}
-    {{ item.price }}
+    <h3>{{ item.name }}</h3>
+    <span>{{ "€" + item.price }}</span>
+    <button class="btn-remove" (click)="removeItem(item)">-</button>
   </section>
+  <hr />
+  <button class="btn-pay" *ngIf="items.length !== 0" (click)="emptyCart()">
+    Pay
+  </button>
 </section>

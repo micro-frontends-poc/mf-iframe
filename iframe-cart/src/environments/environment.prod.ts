@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  CONTAINER: 'http://localhost:3000',
 };

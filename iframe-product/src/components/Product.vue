@@ -1,12 +1,10 @@
 <template>
   <div class="product">
-    <div class="img-container">
-      <img src=" https://www.placecage.com/c/100/100" :alt="product.name" />
-    </div>
+    <div class="img-container w-20 h-20 bg-gray-300 mr-4"></div>
     <div>
       <h3>{{ product.name }}</h3>
       <p>{{ product.description }}</p>
-      <span>€{{ product.price }}</span>
+      <span>{{ product.stock }}</span>
     </div>
     <button class="btn-main " @click="addToCart">+</button>
   </div>
@@ -15,11 +13,13 @@
 <script>
 export default {
   props: ["product"],
+
   methods: {
     addToCart() {
+      this.product.stock--
       window.parent.postMessage(this.product, "http://localhost:3000")
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -33,10 +33,6 @@ export default {
   display: flex;
 
   .img-container {
-    background: white;
-    height: 5rem;
-    width: 5rem;
-    margin-right: 1rem;
     border-radius: 10px;
     overflow: hidden;
   }
@@ -56,14 +52,14 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #ff4848;
+    background: #5fdab1;
     align-self: flex-end;
     margin-left: auto;
     cursor: pointer;
     transition: all 0.5s;
     &:hover {
       transform: scale(1.01);
-      background: lighten(#ff4848, 5%);
+      background: lighten(#5fdab1, 5%);
     }
     &:focus {
       outline: none;

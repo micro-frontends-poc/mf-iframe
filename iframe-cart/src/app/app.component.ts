@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { Item } from './item';
 
 @Component({
@@ -8,6 +8,7 @@ import { Item } from './item';
 })
 export class AppComponent {
   items: Item[] = [];
+  isDarkMode: Boolean = false;
 
   @HostListener('window:message', ['$event'])
   onMessage(event) {
@@ -17,18 +18,29 @@ export class AppComponent {
           event.data.id,
           event.data.name,
           event.data.description,
-          event.data.price
+          event.data.price,
+          event.data.stock
         )
       );
     }
   }
 
-  constructor() {
-    console.log('bar');
+  @Input('mode')
+  set mode(mode: string) {
+    this.isDarkMode = mode == 'dark';
   }
 
   removeItem(item) {
-    this.items = this.items.filter((it) => it.id != item.id);
-    window.parent.postMessage(item.id, 'http://localhost:3000');
+    const itemIndex = this.items.findIndex((it) => item.id == it.id);
+    this.items.splice(itemIndex, 1);
+    window.parent.postMessage(
+      { type: 'removed', id: item.id },
+      'http://localhost:3000'
+    );
+  }
+
+  emptyCart() {
+    this.items.length = 0;
+    window.parent.postMessage({ type: 'paid' }, 'http://localhost:3000');
   }
 }
