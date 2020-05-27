@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import "./Navigation.css"
 
 const Navigation = (props) => {
   const openCart = (e) => {
@@ -9,27 +8,28 @@ const Navigation = (props) => {
   }
 
   return (
-    <nav className="fixed top-0 left-0 w-full flex items-center justify-between flex-wrap bg-purple-800 p-6 z-50">
-      <div className="flex items-center flex-shrink-0 text-white mr-6">
+    <nav className="fixed top-0 left-0 w-full flex items-center justify-between flex-wrap bg-primary p-6 z-50">
+      <div className="flex items-center flex-shrink-0 text-white mr-auto">
         <img
           src="/logo192.png"
           alt="React logo"
           className="object-contain opacity-50 h-16 absolute ml-4"
         />
         <Link to="/" className="z-10">
-          <span className="font-semibold text-xl tracking-tight">
+          <span className="font-semibold text-xl tracking-tight text-primary">
             Microshop
           </span>
         </Link>
       </div>
-      <div className="w-full block flex-grow md:flex md:items-center md:w-auto">
-        <button
-          className="inline-block text-sm px-4 py-2 ml-auto leading-none border rounded text-white border-white hover:border-transparent hover:text-purple-800 hover:bg-white mt-4 md:mt-0"
-          onClick={(e) => openCart(e)}
-        >
-          Checkout ({props.products.length})
-        </button>
-      </div>
+      {props.user && (
+        <span className="text-primary mr-4">Hi, {props.user}</span>
+      )}
+      <button
+        className="inline-block text-sm px-4 py-2 leading-none border rounded text-primary border-white hover:border-transparent hover:text-default hover:bg-default"
+        onClick={(e) => openCart(e)}
+      >
+        Checkout ({props.products.length})
+      </button>
     </nav>
   )
 }

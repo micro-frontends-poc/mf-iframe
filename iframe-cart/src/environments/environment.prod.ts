@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  CONTAINER: 'http://localhost:3000',
+  CONTAINER: 'https://iframe-container.now.sh',
 };

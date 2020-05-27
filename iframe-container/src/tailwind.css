@@ -1,3 +1,41 @@
 @tailwind base;
+:root {
+  --color-bg-primary: #5c0091;
+  --color-bg-primary-soft: #9c5ac2;
+  --color-bg-secondary: #ffc857;
+  --color-bg-default: #fff;
+  --color-bg-inverse: #fff;
+  --color-bg-inverse-soft: #e4e4e4;
+
+  --color-text-primary: #fff;
+  --color-text-secondary: #bdd9bf;
+  --color-text-default: #2e4052;
+  --color-text-default-soft: #3e5164;
+  --color-text-inverse: #444;
+  --color-text-inverse-soft: #999;
+  color: var(--color-text-default);
+}
+
+.theme-dark {
+  --color-bg-primary: #5c0091;
+  --color-bg-primary-soft: #c263fa;
+  --color-bg-secondary: #ffc857;
+  --color-bg-default: #f4f4f4;
+  --color-bg-inverse: #373737;
+  --color-bg-inverse-soft: #494949;
+
+  --color-text-primary: #fff;
+  --color-text-secondary: #bdd9bf;
+  --color-text-default: #e9efff;
+  --color-text-default-soft: #ffffff;
+  --color-text-inverse: #fff;
+  --color-text-inverse-soft: #bbb;
+}
 @tailwind components;
 @tailwind utilities;
+:root {
+  color-scheme: dark light;
+  supported-color-schemes: dark light;
+  --duration: 0.5s;
+  --timing: ease;
+}

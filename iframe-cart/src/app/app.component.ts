@@ -1,4 +1,5 @@
 import { Component, HostListener, Input } from '@angular/core';
+import { environment } from './../environments/environment';
 import { Item } from './item';
 
 @Component({
@@ -12,7 +13,7 @@ export class AppComponent {
 
   @HostListener('window:message', ['$event'])
   onMessage(event) {
-    if (event.origin.startsWith('http://localhost:3000')) {
+    if (event.origin.startsWith(environment.CONTAINER)) {
       this.items.push(
         new Item(
           event.data.id,
@@ -35,12 +36,12 @@ export class AppComponent {
     this.items.splice(itemIndex, 1);
     window.parent.postMessage(
       { type: 'removed', id: item.id },
-      'http://localhost:3000'
+      environment.CONTAINER
     );
   }
 
   emptyCart() {
     this.items.length = 0;
-    window.parent.postMessage({ type: 'paid' }, 'http://localhost:3000');
+    window.parent.postMessage({ type: 'paid' }, environment.CONTAINER);
   }
 }

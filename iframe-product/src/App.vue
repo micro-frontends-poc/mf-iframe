@@ -1,11 +1,11 @@
 <template>
   <div id="app" class=" mt-4">
-    <product v-for="p in products" :key="p.id" :product="p" />
     <img
       src="./assets/logo.png"
       alt="VueJS logo"
       class="object-contain opacity-50 h-16"
     />
+    <product v-for="p in products" :key="p.id" :product="p" :theme="theme" />
   </div>
 </template>
 
@@ -22,11 +22,14 @@ export default {
       if (e.data.type === "removed") {
         const product = that.products.find((x) => x.id == e.data.id)
         product.stock++
+      } else if (e.data.type === "theme") {
+        that.theme = e.data.value
       }
     })
   },
   data() {
     return {
+      theme: "light",
       products: [
         {
           id: 1,

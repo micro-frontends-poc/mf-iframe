@@ -1,23 +1,30 @@
 <template>
-  <div class="product">
-    <div class="img-container w-20 h-20 bg-gray-300 mr-4"></div>
+  <div
+    class="product p-4 m-4 rounded-md flex shadow-lg"
+    :class="{ 'bg-gray-800 text-white': theme === 'dark' }"
+  >
+    <div
+      class="img-container rounded-md w-20 h-20 bg-gray-300 mr-4 overflow-hidden"
+    ></div>
     <div>
-      <h3>{{ product.name }}</h3>
+      <h3 class="mt-0">{{ product.name }}</h3>
       <p>{{ product.description }}</p>
-      <span>{{ product.stock }}</span>
+      <span>Stock: {{ product.stock }}</span>
     </div>
-    <button class="btn-main " @click="addToCart">+</button>
+    <button class="btn-main text-white font-bold px-4" @click="addToCart">
+      +
+    </button>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["product"],
+  props: ["product", "theme"],
 
   methods: {
     addToCart() {
       this.product.stock--
-      window.parent.postMessage(this.product, "http://localhost:3000")
+      window.parent.postMessage(this.product, process.env.VUE_APP_CONTAINER)
     },
   },
 }
@@ -25,24 +32,6 @@ export default {
 
 <style lang="scss">
 .product {
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 2px 2px 15px #afb8d4;
-  display: flex;
-
-  .img-container {
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
-  h3 {
-    margin-top: 0;
-  }
-  p {
-  }
-
   button {
     border-width: 0px;
     border-radius: 50%;
@@ -58,7 +47,8 @@ export default {
     cursor: pointer;
     transition: all 0.5s;
     &:hover {
-      transform: scale(1.01);
+      outline: none;
+      transform: scale(1.05);
       background: lighten(#5fdab1, 5%);
     }
     &:focus {
