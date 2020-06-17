@@ -8,8 +8,8 @@ function App() {
   const [cartToggle, setCartToggle] = useState(false)
   const [user, setUser] = useState("")
 
-  const handleChange = useCallback(
-    (event) => {
+  useEffect(() => {
+    const handleChange = (event) => {
       const CART = process.env.REACT_APP_CART
       const PRODUCTS = process.env.REACT_APP_PRODUCTS
       const pi = document.getElementById("products-iframe")
@@ -38,15 +38,12 @@ function App() {
       } else if (event.data.type === "user") {
         setUser(event.data.value)
       }
-    },
-    [products]
-  )
-  useEffect(() => {
-    window.addEventListener("message", handleChange)
-    return () => {
-      window.removeEventListener("message", handleChange)
     }
-  }, [handleChange])
+    window.addEventListener("message", (event) => handleChange(event))
+    return () => {
+      window.removeEventListener("message", (event) => handleChange(event))
+    }
+  }, [products])
 
   const handleCartToggle = (cartState) => {
     setCartToggle(cartState)
