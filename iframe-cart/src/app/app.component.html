@@ -7,6 +7,7 @@
     <img src="./assets/Angular.png" alt="Angular logo" class="ng-logo" />
     <h2>Cart</h2>
   </div>
+  <div *ngIf="items.length === 0">The cart is empty</div>
   <section class="item-cart" *ngFor="let item of items">
     <h3>{{ item.name }}</h3>
     <button class="btn-remove" (click)="removeItem(item)">-</button>

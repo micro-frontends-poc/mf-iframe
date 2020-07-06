@@ -8,42 +8,49 @@ function App() {
   const [cartToggle, setCartToggle] = useState(false)
   const [user, setUser] = useState("")
 
-  useEffect(() => {
-    const handleChange = (event) => {
-      const CART = process.env.REACT_APP_CART
-      const PRODUCTS = process.env.REACT_APP_PRODUCTS
-      const pi = document.getElementById("products-iframe")
-      const ci = document.getElementById("cart-iframe")
+  const handleChange = useCallback ((event) => {
+    const CART = process.env.REACT_APP_CART
+    const PRODUCTS = process.env.REACT_APP_PRODUCTS
+    const pi = document.getElementById("products-iframe")
+    const ci = document.getElementById("cart-iframe")
 
-      if (event.origin.startsWith(PRODUCTS)) {
-        setProducts((products) => [...products, event.data.name])
-        ci.contentWindow.postMessage(event.data, CART)
-      } else if (event.origin.startsWith(CART)) {
-        if (event.data.type === "paid") {
-          setProducts([])
-        } else if (event.data.type === "removed") {
-          const id = event.data.id
-          const itemIndex = products.findIndex((it) => id === it.id)
-          const items = products
-          items.splice(itemIndex, 1)
-          setProducts(items)
-          pi.contentWindow.postMessage(event.data, PRODUCTS)
-        }
-      } else if (event.data.type === "theme") {
+    switch (event.data.type) {
+      case 'added':
+        console.log('Product arrived from Vue project to React container:', event.data.product)
+        setProducts((products) => [...products, event.data.product.name])
+        ci.contentWindow.postMessage(event.data.product, CART)
+        break
+      case 'paid' :
+        setProducts([])
+        break
+      case "removed": 
+        const id = event.data.id
+        const itemIndex = products.findIndex((it) => id === it.id)
+        const items = products
+        items.splice(itemIndex, 1)
+        setProducts(items)
+        pi.contentWindow.postMessage(event.data, PRODUCTS)
+        break
+      case "theme": 
         event.data.value === "dark"
           ? document.documentElement.classList.add("theme-dark")
           : document.documentElement.classList.remove("theme-dark")
         pi.contentWindow.postMessage(event.data, PRODUCTS)
         ci.contentWindow.postMessage(event.data, CART)
-      } else if (event.data.type === "user") {
+        break
+      case "user": 
         setUser(event.data.value)
-      }
+        break
     }
-    window.addEventListener("message", (event) => handleChange(event))
+  }, [])
+
+  useEffect(() => {
+    
+    window.addEventListener("message", handleChange)
     return () => {
-      window.removeEventListener("message", (event) => handleChange(event))
+      window.removeEventListener("message", handleChange)
     }
-  }, [products])
+  }, [handleChange])
 
   const handleCartToggle = (cartState) => {
     setCartToggle(cartState)

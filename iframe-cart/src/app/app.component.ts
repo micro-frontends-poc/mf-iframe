@@ -13,6 +13,7 @@ export class AppComponent {
 
   @HostListener('window:message', ['$event'])
   onMessage(event) {
+    console.log('Message arrived to Angular cart:', event.data)
     if (event.origin.startsWith(environment.CONTAINER)) {
       this.items.push(
         new Item(

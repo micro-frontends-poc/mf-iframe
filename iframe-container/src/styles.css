@@ -579,7 +579,7 @@ video {
 }
 
 :root {
-  --color-bg-primary: #5c0091;
+  --color-bg-primary: #45459D;
   --color-bg-primary-soft: #9c5ac2;
   --color-bg-secondary: #ffc857;
   --color-bg-default: #fff;
@@ -595,7 +595,7 @@ video {
 }
 
 .theme-dark {
-  --color-bg-primary: #5c0091;
+  --color-bg-primary: #45459D;
   --color-bg-primary-soft: #c263fa;
   --color-bg-secondary: #ffc857;
   --color-bg-default: #f4f4f4;

@@ -1,9 +1,9 @@
 <template>
-  <div id="app" class=" mt-4">
+  <div  class=" mt-4">
     <img
       src="./assets/logo.png"
       alt="VueJS logo"
-      class="object-contain opacity-50 h-16"
+      class="object-contain opacity-50 mx-auto h-16"
     />
     <product v-for="p in products" :key="p.id" :product="p" :theme="theme" />
   </div>
@@ -57,11 +57,54 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+</style>
+<style global>
+  @tailwind base;
+  h1 {
+  @apply text-2xl;
+}
+
+h2 {
+  @apply text-xl font-bold;
+}
+
+h3 {
+  @apply text-lg font-bold;
+}
+
+ul {
+  @apply list-disc;
+}
+
+ol {
+  @apply list-decimal;
+}
+
+a {
+  @apply text-blue-600;
+}
+
+table {
+  @apply border border-gray-600 w-full;
+}
+
+th {
+  @apply bg-gray-400 px-4;
+}
+
+td {
+}
+  @tailwind components;
+  @tailwind utilities;
+  html,
+body,
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  height: 100%;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
 }
 </style>

@@ -1,24 +1,42 @@
-# iframe-product
+# iframe-product-parcel
 
-## Project setup
-```
+Empty project.
+
+## Building and running on localhost
+
+First install dependencies:
+
+```sh
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
+To run in hot module reloading mode:
+
+```sh
+npm start
 ```
 
-### Compiles and minifies for production
-```
-npm run build
+To create a production build:
+
+```sh
+npm run build-prod
 ```
 
-### Lints and fixes files
-```
-npm run lint
+## Running
+
+```sh
+node dist/bundle.js
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Testing
+
+To run unit tests:
+
+```sh
+npm test
+```
+
+## Credits
+
+Made with [createapp.dev](https://createapp.dev/)
+
